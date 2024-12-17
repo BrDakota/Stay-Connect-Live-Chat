@@ -71,6 +71,7 @@
             loginBtn.TabIndex = 1;
             loginBtn.Text = "Login";
             loginBtn.UseVisualStyleBackColor = false;
+            loginBtn.Click += loginBtn_Click;
             // 
             // signUpBtn
             // 
@@ -82,6 +83,7 @@
             signUpBtn.TabIndex = 2;
             signUpBtn.Text = "Sign Up";
             signUpBtn.UseVisualStyleBackColor = false;
+            signUpBtn.Click += signUpBtn_Click;
             // 
             // logPassBox
             // 
