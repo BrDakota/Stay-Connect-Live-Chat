@@ -37,7 +37,6 @@
             passLbl = new Label();
             titleLbl = new Label();
             signUpPnl = new Panel();
-            subBtn = new Button();
             name1Box = new TextBox();
             name2Box = new TextBox();
             userBox = new TextBox();
@@ -49,6 +48,7 @@
             userLbl = new Label();
             name2Lbl = new Label();
             name1Lbl = new Label();
+            subBtn = new Button();
             signUpPnl.SuspendLayout();
             SuspendLayout();
             // 
@@ -138,7 +138,6 @@
             // 
             // signUpPnl
             // 
-            signUpPnl.Controls.Add(subBtn);
             signUpPnl.Controls.Add(name1Box);
             signUpPnl.Controls.Add(name2Box);
             signUpPnl.Controls.Add(userBox);
@@ -156,17 +155,6 @@
             signUpPnl.Size = new Size(614, 483);
             signUpPnl.TabIndex = 8;
             signUpPnl.Visible = false;
-            // 
-            // subBtn
-            // 
-            subBtn.BackColor = Color.RoyalBlue;
-            subBtn.ForeColor = SystemColors.ButtonHighlight;
-            subBtn.Location = new Point(236, 413);
-            subBtn.Name = "subBtn";
-            subBtn.Size = new Size(142, 40);
-            subBtn.TabIndex = 9;
-            subBtn.Text = "Submit";
-            subBtn.UseVisualStyleBackColor = false;
             // 
             // name1Box
             // 
@@ -279,12 +267,25 @@
             name1Lbl.TabIndex = 0;
             name1Lbl.Text = "First Name:";
             // 
+            // subBtn
+            // 
+            subBtn.BackColor = Color.RoyalBlue;
+            subBtn.ForeColor = SystemColors.ButtonHighlight;
+            subBtn.Location = new Point(236, 387);
+            subBtn.Name = "subBtn";
+            subBtn.Size = new Size(142, 60);
+            subBtn.TabIndex = 9;
+            subBtn.Text = "Submit";
+            subBtn.UseVisualStyleBackColor = false;
+            subBtn.Click += subBtn_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(64, 64, 64);
             ClientSize = new Size(609, 601);
+            Controls.Add(subBtn);
             Controls.Add(signUpPnl);
             Controls.Add(titleLbl);
             Controls.Add(passLbl);
