@@ -36,10 +36,6 @@ namespace Stay_Connect
 
         private void subBtn_Click(object sender, EventArgs e)
         {
-            string connectionString;
-            MySqlConnection cnn;
-            connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
-            cnn = new MySqlConnection(connectionString);
             if (signUpPnl.Enabled == false)
             {
                 // This if for the login in page
@@ -52,41 +48,18 @@ namespace Stay_Connect
 
                 try
                 {
-                    cnn.Open();
+                    dbAccess dba = new dbAccess();
+                    bool correct = dba.CheckPassword(logEmailBox.Text, logPassBox.Text);
 
-                    bool hasInfo = false;
-                    MySqlCommand cmd = new MySqlCommand();
-                    cmd.Connection = cnn;
-                    cmd.CommandText = @"SELECT * FROM users WHERE userName = @logBox OR email = @logBox;";
-                    cmd.Parameters.AddWithValue("@logBox", logEmailBox.Text);
-
-                    var reader = cmd.ExecuteReader();
+                    if(correct)
                     {
-                        while (reader.Read())
-                        {
-                            var pass = reader.GetString("_password");
-                            var firstName = reader.GetString("firstName");
-                            var lastName = reader.GetString("lastName");
-                            hasInfo = true;
-
-                            if (pass == logPassBox.Text)
-                            {
-                                MessageBox.Show($"Log in successful\nName: {firstName} {lastName}");
-                            }
-                            else
-                            {
-                                MessageBox.Show("Your user name or password did not match");
-                            }
-                        }
-                    }
-
-                    cnn.Close();
-
-                    if (!hasInfo) // This will return if the database does not return anything from the select
+                        Form2 f2 = new Form2();
+                        f2.Show();
+                        this.Hide();
+                    }else
                     {
-                        MessageBox.Show("That username or password was incorrect");
+                        MessageBox.Show("The email or password you entered was not correct");
                     }
-
                 }
                 catch (Exception ex)
                 {
@@ -105,15 +78,8 @@ namespace Stay_Connect
 
                 try
                 {
-                    cnn.Open();
-
-                    MySqlCommand cmd = new MySqlCommand();
-                    cmd.Connection = cnn;
-                    cmd.CommandText = $"INSERT INTO users (userName, email, firstName, lastName, _password)" +
-                        $"VALUES('{userBox.Text}', '{signEmailBox.Text}', '{name1Box.Text}', '{name2Box.Text}', '{signPassBox.Text}')";
-                    var writer = cmd.ExecuteNonQuery();
-
-                    cnn.Close();
+                    dbAccess dba = new dbAccess();
+                    dba.InsertUser(userBox.Text, name1Box.Text, name2Box.Text, signEmailBox.Text, signPassBox.Text);
                     MessageBox.Show("Thank your for signing up");
                 }
                 catch (Exception ex)
